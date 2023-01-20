@@ -10,21 +10,24 @@ import {
 
 function Navbar() {
     const { height, width } = useWindowDimensions();
-    const [showNavbar, setShowNavbar] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(false); // pour montrer la navbar en responsive
     const isAuth = false;
 
     useEffect(() => {
         // On ne veut pas cette variable à true lorsqu'on est sur la version web
         // alors on vérifie la taille de la fenêtre pour savoir si on la turn à false
         if (showNavbar === true) {
-            if (width > 1024) {
+            if (isResponsive()) {
                 setShowNavbar(false)
             }
         }
     }, [width])
 
-    const handleNavbar = (e) => {
-        e.preventDefault();
+    const isResponsive = () => {
+        return width < 1024;
+    }
+
+    const handleNavbar = () => {
         setShowNavbar(!showNavbar);
     }
 
@@ -35,23 +38,23 @@ function Navbar() {
         >
             {/* Le container du logo */}
             <div className="navbar_logo_container">
-                <BsList className="navbar_btn_list" size={32} onClick={(e)=>handleNavbar(e)}/>
-                <NavLink to="/" className="navbar_title">Express Food</NavLink>
+                <BsList className="navbar_btn_list" size={32} onClick={()=>handleNavbar()}/>
+                <NavLink to="/" className="navbar_title" onClick={(e)=>setShowNavbar(false)}>Express Food</NavLink>
             </div>
             {/* La liste de la navbar */}
             <div className="navbar_liste">
                 {
                     isAuth &&
                     <ul>
-                        <NavLink to="/login" className="link">Connexion</NavLink>
-                        <NavLink to="/signup" className="link">Inscription</NavLink>
+                        <NavLink to="/login" className="link" onClick={(e)=>setShowNavbar(false)}>Connexion</NavLink>
+                        <NavLink to="/signup" className="link" onClick={(e)=>setShowNavbar(false)}>Inscription</NavLink>
                     </ul>
                     ||
                     <ul>
-                        <NavLink to="/profil" className="link">Accès à mon profil</NavLink>
-                        <NavLink to="/panier" className="link">Mon panier</NavLink>
-                        <NavLink to="/myOrders" className="link">Mes commandes</NavLink>
-                        <NavLink to="/logout" className="link">Déconnexion</NavLink>
+                        <NavLink to="/profil" className="link" onClick={(e)=>setShowNavbar(false)}>Accès à mon profil</NavLink>
+                        <NavLink to="/panier" className="link" onClick={(e)=>setShowNavbar(false)}>Mon panier</NavLink>
+                        <NavLink to="/myOrders" className="link" onClick={(e)=>setShowNavbar(false)}>Mes commandes</NavLink>
+                        <NavLink to="/logout" className="link" onClick={(e)=>setShowNavbar(false)}>Déconnexion</NavLink>
                     </ul>
                 }
             </div>
