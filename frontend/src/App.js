@@ -11,13 +11,15 @@ import Home from './pages/Home';
 function App() {
   return (
     <div className="App">
-        <Router>
+      <Router>
+        <div className="content-wrapper">
             <Navbar />        
             <Routes>
                 <Route path="/" element={<Home />} />
             </Routes>
-        </Router>
+        </div>
         <Footer />
+      </Router>
     </div>
   );
 }
