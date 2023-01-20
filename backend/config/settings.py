@@ -16,7 +16,9 @@ from decouple import config
 
 MONGO_URI = config('MONGO_URI')
 client = MongoClient(MONGO_URI)
-db = client.get_database()
+
+# connect to my MongoDB cluster
+db = client.get_database('expressFoodDB')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # other apps
+    'djongo',
+    # local
+    'express_food'
 ]
 
 MIDDLEWARE = [
@@ -79,9 +86,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-""" The DATABASES setting is used to configure connections to SQL databases, 
-such as PostgreSQL or MySQL, when using Django's built-in ORM. 
-Since I am using MongoDB and PyMongo, I won't need this setting. """
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'expressFoodDB',
+        'CLIENT': {
+            'host': MONGO_URI,
+        }
+    }
+}
+
 
 
 # Password validation
