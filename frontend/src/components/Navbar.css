@@ -1,0 +1,101 @@
+.navbar_component {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    padding-left: 50px;
+    background-color: white;
+    /* border-bottom: 5px solid var(--secondary-color); */
+    position: relative;
+}
+
+.navbar_component .navbar_title {
+    cursor: pointer;
+    font-size: 38px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.navbar_btn_list {
+    display: none;
+    padding: 5px;
+}
+
+.navbar_liste ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    gap: 40px;
+}
+
+.navbar_liste ul .link {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.navbar_liste ul .link::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0px;
+    background-color: var(--secondary-color);
+    transition: ease-in-out all 0.1s;
+}
+
+.navbar_liste ul .link:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .navbar_component {
+        flex-direction: column;
+        justify-content: normal;
+        padding: 0px;
+        overflow: hidden;
+        transition: ease-in-out all 0.2s;
+        gap: 10px;
+        border-bottom: 5px solid var(--secondary-color);
+    }
+    .navbar_logo_container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        padding: 10px;
+    }
+    .navbar_btn_list {
+        display: block;
+        left: 3%;
+        position: absolute;
+        cursor: pointer;
+    }
+    .navbar_btn_list:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    .navbar_liste {
+        width: 100%;
+    }
+    .navbar_liste ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 0px;
+    }
+    .navbar_liste ul .link {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        padding: 20px 0px;
+        transition: 0.3s ease-in-out all;
+        background-color: rgb(224, 224, 224);
+    }
+    .navbar_liste ul .link:hover {
+        background-color: var(--secondary-color);
+    }
+    .navbar_liste ul .link::after { 
+        display: none;
+    }
+}

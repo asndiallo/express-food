@@ -1,6 +1,13 @@
+:root {
+    --primary-color: black;
+    --secondary-color: rgb(250, 144, 44);
+    --background-color: rgba(196, 192, 147, 0.15);
+}
+
 body, html {
     margin: 0px;
     padding: 0px;
     min-width: 100vw;
-    min-height: 100vw;
+    min-height: 100vh;
+    background-color: var(--background-color);
 }
