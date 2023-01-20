@@ -57,7 +57,7 @@
         padding: 0px;
         overflow: hidden;
         transition: ease-in-out all 0.2s;
-        gap: 10px;
+        gap: 25px;
         border-bottom: 5px solid var(--secondary-color);
     }
     .navbar_logo_container {

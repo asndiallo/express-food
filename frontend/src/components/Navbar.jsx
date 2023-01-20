@@ -31,7 +31,7 @@ function Navbar() {
     return ( 
         <div 
             className="navbar_component" 
-            style={{height: showNavbar ? 270 : 75}}
+            style={{height: showNavbar ? 325 : 75}}
         >
             {/* Le container du logo */}
             <div className="navbar_logo_container">
