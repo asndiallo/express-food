@@ -2,6 +2,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Components
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 // Pages
 import Home from './pages/Home';
@@ -9,12 +11,13 @@ import Home from './pages/Home';
 function App() {
   return (
     <div className="App">
-        <h1 style={{textAlign: 'center', fontSize: 42}}>Express Food</h1>
+        <Navbar />        
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
             </Routes>
         </Router>
+        <Footer />
     </div>
   );
 }
