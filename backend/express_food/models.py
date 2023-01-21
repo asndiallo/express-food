@@ -8,7 +8,7 @@ class Customer(models.Model):
     birthday = models.DateTimeField()
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
-    adresse = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
     zip = models.IntegerField()
     country = models.CharField(max_length=255)
 
