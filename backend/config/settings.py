@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     # local
-    'express_food'
+    'customers'
 ]
 
 REST_FRAMEWORK = {

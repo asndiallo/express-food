@@ -7,6 +7,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=255)
     birthday = models.DateTimeField()
     email = models.EmailField(unique=True)
+    password = models.CharField(max_length=255)
     phone = models.CharField(max_length=15)
     address = models.CharField(max_length=255)
     zip = models.IntegerField()
