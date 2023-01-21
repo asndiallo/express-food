@@ -71,9 +71,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+BACKEND_URL = config("BACKEND_URL")
+FRONTEND_URL = config("FRONTEND_URL")
+
 CORS_ALLOWED_ORIGINS = (
-    "http://localhost:3000",
-    "http://localhost:8000",
+    FRONTEND_URL,
+    BACKEND_URL,
 )
 
 ROOT_URLCONF = "config.urls"
@@ -152,4 +155,4 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = ["https://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = [FRONTEND_URL]
