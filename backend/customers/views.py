@@ -1,6 +1,5 @@
 from bson import ObjectId
-from rest_framework import generics, status
-from rest_framework.response import Response
+from rest_framework import generics
 from django.contrib.auth.hashers import make_password
 from .models import Customer
 from .serializers import CustomerSerializer, SignupSerializer
@@ -31,4 +30,3 @@ class SignupView(generics.CreateAPIView):
         # Create a new customer object and save it to the database
         customer = Customer(**serializer.validated_data)
         customer.save()
-
