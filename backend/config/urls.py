@@ -18,6 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #path('', include('express_food.urls')),
     path('api/v1/customers/', include('express_food.urls')),
 ]
