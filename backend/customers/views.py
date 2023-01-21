@@ -1,8 +1,10 @@
 from bson import ObjectId
-from rest_framework import generics
-from django.contrib.auth.hashers import make_password
+import jwt
+from rest_framework.response import Response
+from rest_framework import generics, views, status
+from django.contrib.auth.hashers import make_password, check_password
 from .models import Customer
-from .serializers import CustomerSerializer, SignupSerializer
+from .serializers import CustomerSerializer, SignupSerializer, LoginSerializer
 
 
 class CustomerList(generics.ListCreateAPIView):
@@ -30,3 +32,22 @@ class SignupView(generics.CreateAPIView):
         # Create a new customer object and save it to the database
         customer = Customer(**serializer.validated_data)
         customer.save()
+
+
+class LoginView(views.APIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
+        user = Customer.objects.filter(email=email).first()
+        if user and check_password(password, user.password):
+            # Generate JWT token
+            token = jwt.encode({'email': email}, 'secret-key')
+            return Response({'token': token}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+

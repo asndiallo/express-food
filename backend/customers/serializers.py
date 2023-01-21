@@ -19,3 +19,7 @@ class SignupSerializer(serializers.Serializer):
     address = serializers.CharField()
     zip = serializers.CharField()
     country = serializers.CharField()
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
