@@ -1,8 +1,14 @@
 <h1>Customer List</h1>
+{% if customers %}
 <ul>
   {% for customer in customers %}
-  <a href="{% url 'customer_detail' customer.pk %}"
+  <li>
+    <a href="{% url 'customer_detail' customer.pk %}"
     >{{ customer.first_name }} {{ customer.last_name }}</a
   >
+  </li>
   {% endfor %}
 </ul>
+{% else %}
+<p>No customer availaible.</p>
+{% endif %}
