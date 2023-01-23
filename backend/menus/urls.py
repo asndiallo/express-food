@@ -1,11 +1,9 @@
 from django.urls import path
-from .views import MenuList, MenuDetail, DishList, DishDetail, DessertList, DessertDetail
+from .views import MenuTypeView, MenuTypeDetailView, MenuCreateView
 
 urlpatterns = [
-    path('', MenuList.as_view(), name='menu_list'),
-    path('menu/<str:pk>/', MenuDetail.as_view(), name='menu_detail'),
-    path('dishes/', DishList.as_view(), name='dish_list'),
-    path('dishes/<str:pk>/', DishDetail.as_view(), name='dish_detail'),
-    path('desserts/', DessertList.as_view(), name='dessert_list'),
-    path('desserts/<str:pk>/', DessertDetail.as_view(), name='dessert_detail'),
+    path('<str:menu_type>/', MenuTypeView.as_view(), name='menu_type'),
+    path('<str:menu_type>/<str:pk>/',
+         MenuTypeDetailView.as_view(), name='menu_type_detail'),
+    path('', MenuCreateView.as_view(), name='menu_create')
 ]
