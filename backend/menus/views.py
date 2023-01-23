@@ -1,4 +1,3 @@
-from rest_framework.response import Response
 from bson import ObjectId
 from rest_framework import generics
 from .models import Menu
