@@ -37,6 +37,7 @@ function Signup() {
         setMessageMail('');
         setMessageBirthday('');
         setMessageLogin('');
+        setMessagePhone('');
         setMessageCountry('');
     }
 
@@ -88,7 +89,7 @@ function Signup() {
             setMessageMail("Veuillez renseigner un mail entre 3 et 32 caractères !")
             validate = false;
         }
-        if (phone.length !== 10) {
+        if (parseInt(phone.length) !== 10) {
             setMessagePhone("Veuillez renseigner un numéro de téléphone valide !")
             validate = false;
         }
