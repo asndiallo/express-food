@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profil from './pages/Profil';
+import PrivateRoutes from './utils/PrivateRoutes';
 
 function App() {
   return (
@@ -18,10 +19,14 @@ function App() {
         <div className="content-wrapper">
             <Navbar />        
             <Routes>
+              <Route element={<PrivateRoutes />}>
+                  {/* // METTRE LES ROUTES QUI NECCESSITE UNE CONNEXION ICI */}
+                  <Route path="/profil" element={<Profil />} />
+
+              </Route>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/profil" element={<Profil />} />
             </Routes>
         </div>
         <Footer />
