@@ -1,4 +1,5 @@
 import React from 'react';
+import Menu from '../components/Menu';
 import './Home.css';
 
 function Home() {
@@ -15,7 +16,7 @@ function Home() {
                 <div className="dish">
                     <h1>Plats du jour :</h1>
                     <div className="dish_content">
-
+                        <Menu />
                     </div>
                 </div>
                 <div className="dessert">
