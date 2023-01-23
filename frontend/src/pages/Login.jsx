@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import './Login.css';
 import axios from "axios";
+import {domain} from '../variables.js'
 
 function Login() {
     const [login, setLogin] = useState('');
@@ -9,7 +10,7 @@ function Login() {
     const [messagePassword, setMessagePassword] = useState('');
 
     const connection = async () => {
-        const link = "http://localhost:8000/api/v1/customers/login/";
+        const link = domain + "/api/v1/customers/login/";
         if (link !== '') {
             await axios.post(link, {
                 email: login,
