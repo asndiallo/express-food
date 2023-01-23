@@ -34,7 +34,7 @@ function Profil() {
     }, [])
 
     const updateProfil = async () => {
-        const link = domain + "/api/v1/customers/login/";
+        const link = domain + "/api/v1/customers/" + localStorage.id;
         if (link !== '') {
             await axios.put(link, {
                 _id: localStorage.id,
@@ -59,9 +59,9 @@ function Profil() {
     }
 
     const getProfil = async () => {
-        const link = domain + "/api/v1/customers/login/";
+        const link = domain + "/api/v1/customers/" + localStorage.id;
         if (link !== '') {
-            await axios.put(link, {
+            await axios.get(link, {
                 _id: localStorage.id,
                 token: localStorage.token
             })
@@ -155,6 +155,10 @@ function Profil() {
         if (!(country.length >= 3)) {
             setMessageCountry("Veuillez renseigner un pays valide !")
             validate = false;
+        }
+
+        if (validate) {
+            updateProfil();
         }
 
         return validate;
