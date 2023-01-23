@@ -16,7 +16,7 @@ function Login() {
             validate = false;
         }
         if (!(password.length >= 3 && password.length <= 20)) {
-            setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
+            setMessagePassword("Veuillez renseigner un mot de passe entre 3 et 20 caractères !")
             validate = false;
         }
 

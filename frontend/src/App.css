@@ -60,7 +60,7 @@ html, body {
     margin-bottom: 5px;
 }
 
-.log-formulaire input[type="text"], .log-formulaire input[type="password"] {
+.log-formulaire input[type="text"], .log-formulaire input[type="password"], .log-formulaire input[type="date"]  {
     width: 20em;
     max-width: 400px;
     padding: 10px;
