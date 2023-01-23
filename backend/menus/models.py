@@ -7,3 +7,6 @@ class Menu(models.Model):
     description = models.CharField(max_length=255)
     price = models.FloatField()
     type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
