@@ -9,7 +9,7 @@ function Login() {
     const [messagePassword, setMessagePassword] = useState('');
 
     const connection = async () => {
-        const link = "http://localhost:8000/api/v1/customers/login";
+        const link = "http://localhost:8000/api/v1/customers/login/";
         if (link !== '') {
             await axios.post(link, {
                 email: login,
