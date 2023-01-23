@@ -2,12 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0px;
     padding: 25px;
     padding-left: 50px;
     background-color: white;
     overflow-y: hidden;
     /* border-bottom: 5px solid var(--secondary-color); */
-    position: relative;
 }
 
 .navbar_component .navbar_title {
