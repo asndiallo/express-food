@@ -1,5 +1,7 @@
 from bson import ObjectId
-import jwt
+from jwt import PyJWT
+import datetime
+from decouple import config
 from rest_framework.response import Response
 from rest_framework import generics, views, status
 from django.contrib.auth.hashers import make_password, check_password
@@ -45,9 +47,18 @@ class LoginView(views.APIView):
         password = serializer.validated_data['password']
         user = Customer.objects.filter(email=email).first()
         if user and check_password(password, user.password):
-            # Generate JWT token
-            token = jwt.encode({'email': email}, 'secret-key')
+            # Create a new JWT object
+            jwt_encoder = PyJWT()
+
+            # Set the payload for the JWT
+            payload = {
+                'email': email,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            }
+
+            # Encode the payload and create the token
+            secret_key = config('TOKEN_SECRET_KEY')
+            token = jwt_encoder.encode(payload, secret_key)
             return Response({'token': token}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
