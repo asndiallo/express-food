@@ -4,12 +4,18 @@
     --background-color: rgba(196, 192, 147, 0.15);
 }
 
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 body, html {
     margin: 0px;
     padding: 0px;
     height: 100%;
-    min-width: 100vw;
-    min-height: 100vh;
+    min-width: 100%;
+    min-height: 100%;
     background-color: var(--background-color);
 }
 
@@ -22,8 +28,65 @@ body, html {
 }
 
 .content-wrapper {
+    flex: 1;
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
     position: relative;
+}
+
+.container-col {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.log-formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 650px;
+    padding: 30px;
+    gap: 20px;
+    background-color: rgba(230, 228, 228, 0.301);
+    box-shadow: 1px 11px 5px -5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 1px 11px 5px -5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 1px 11px 5px -5px rgba(0,0,0,0.5);
+}
+
+.log-formulaire label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.log-formulaire input[type="text"], .log-formulaire input[type="password"] {
+    width: 20em;
+    max-width: 400px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.5);
+}
+
+.log-formulaire input[type="submit"] {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 75px;
+    border: none;
+    outline: none;
+    background-color: aliceblue;
+    transition: ease-in-out 0.2s all;
+}
+
+.log-formulaire input[type="submit"]:hover {
+    background-color: var(--secondary-color);
+}
+
+.log-message {
+    font-size: 14px;
+    margin: 0px;
+    color: red;
 }
