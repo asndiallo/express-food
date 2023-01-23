@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
 // On importe les icones de react-icons
@@ -9,9 +9,9 @@ import {
 } from 'react-icons/bs';
 
 function Navbar() {
+    const navigate = useNavigate();
     const { height, width } = useWindowDimensions();
     const [showNavbar, setShowNavbar] = useState(false); // pour montrer la navbar en responsive
-    const isAuth = false;
 
     useEffect(() => {
         // On ne veut pas cette variable à true lorsqu'on est sur la version web
@@ -31,10 +31,29 @@ function Navbar() {
         setShowNavbar(!showNavbar);
     }
 
+    const logout = () => {
+        localStorage.id = null
+        localStorage.token = null;
+        navigate('/');
+        setShowNavbar(false);
+    }
+
+    const isConnected = () => {
+        return localStorage.getItem("id") !== 'null'
+               && localStorage.getItem("token") !== 'null'
+    }
+
+    const getHeightNavbarResponsive = () => {
+        if (!isConnected()) {
+            return 223;
+        }
+        return 340;
+    }
+
     return ( 
         <div 
             className="navbar_component" 
-            style={{height: showNavbar ? 340 : 75}}
+            style={{height: showNavbar ? getHeightNavbarResponsive() : 75}}
         >
             {/* Le container du logo */}
             <div className="navbar_logo_container">
@@ -44,7 +63,7 @@ function Navbar() {
             {/* La liste de la navbar */}
             <div className="navbar_liste">
                 {
-                    isAuth &&
+                    !isConnected() &&
                     <ul>
                         <NavLink to="/login" className="link" onClick={(e)=>setShowNavbar(false)}>Connexion</NavLink>
                         <NavLink to="/signup" className="link" onClick={(e)=>setShowNavbar(false)}>Inscription</NavLink>
@@ -54,7 +73,7 @@ function Navbar() {
                         <NavLink to="/profil" className="link" onClick={(e)=>setShowNavbar(false)}>Accès à mon profil</NavLink>
                         <NavLink to="/panier" className="link" onClick={(e)=>setShowNavbar(false)}>Mon panier</NavLink>
                         <NavLink to="/myOrders" className="link" onClick={(e)=>setShowNavbar(false)}>Mes commandes</NavLink>
-                        <NavLink to="/logout" className="link" onClick={(e)=>setShowNavbar(false)}>Déconnexion</NavLink>
+                        <span className="link" onClick={(e)=>logout()}>Déconnexion</span>
                     </ul>
                 }
             </div>

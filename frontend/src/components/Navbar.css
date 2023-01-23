@@ -32,6 +32,7 @@
 }
 
 .navbar_liste ul .link {
+    cursor: pointer;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
