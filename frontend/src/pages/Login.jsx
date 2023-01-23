@@ -1,11 +1,29 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import './Login.css';
+import axios from "axios";
 
 function Login() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [messageLogin, setMessageLogin] = useState('');
     const [messagePassword, setMessagePassword] = useState('');
+
+    const connection = async () => {
+        const link = "http://localhost:8000/api/v1/customers/login/";
+        if (link !== '') {
+            await axios.post(link, {
+                email: login,
+                password: password
+            })
+            .then(function(res) {
+               var data = res.data;
+               console.log(res)
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        } 
+    }
 
     const handleSubmit = (event) => {
         let validate = true;
@@ -18,6 +36,10 @@ function Login() {
         if (!(password.length >= 3 && password.length <= 20)) {
             setMessagePassword("Veuillez renseigner un mot de passe entre 3 et 20 caractères !")
             validate = false;
+        }
+
+        if (validate) {
+            connection();
         }
 
         return validate;

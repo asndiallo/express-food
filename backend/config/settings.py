@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     # local
     'api',
     'customers',
-    'menus'
+    'menus',
+    'deliverers'
 ]
 
 REST_FRAMEWORK = {
