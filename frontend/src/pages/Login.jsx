@@ -8,20 +8,26 @@ function Login() {
     const [messagePassword, setMessagePassword] = useState('');
 
     const handleSubmit = (event) => {
+        let validate = true;
         event.preventDefault();
 
         if (!(login.length >= 3 && login.length <= 20)) {
             setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
+            validate = false;
         }
         if (!(password.length >= 3 && password.length <= 20)) {
             setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
+            validate = false;
         }
 
-        alert('ok')
+        return validate;
     }
 
     return ( 
-        <div className="login_page">
+        <div 
+            className="login_page"
+            style={{backgroundImage: "url(/images/chad.jpg)", backgroundSize: "100% 100%", backgroundRepeat: 'no-repeat'}}
+        >
             <div className="login_content">
                 <form action="" className="log-formulaire" onSubmit={(e)=>handleSubmit(e)}>
                     <h1>Connexion</h1>
