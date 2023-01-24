@@ -34,6 +34,7 @@ class SignupView(generics.CreateAPIView):
         # Create a new customer object and save it to the database
         customer = Customer(**serializer.validated_data)
         customer.save()
+        return Response({'message': 'Customer created successfully'}, status=status.HTTP_201_CREATED)
 
 
 class LoginView(views.APIView):
@@ -59,6 +60,6 @@ class LoginView(views.APIView):
             # Encode the payload and create the token
             secret_key = config('TOKEN_SECRET_KEY')
             token = jwt_encoder.encode(payload, secret_key)
-            return Response({'token': token}, status=status.HTTP_200_OK)
+            return Response({'token': token, 'customer_id': str(user._id), }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
