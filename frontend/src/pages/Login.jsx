@@ -1,9 +1,11 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import axios from "axios";
 import {domain} from '../variables.js'
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate = useNavigate();
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [messageLogin, setMessageLogin] = useState('');
@@ -18,9 +20,17 @@ function Login() {
             })
             .then(function(res) {
                var data = res.data;
-               console.log(res)
+               if (data !== null) {
+                    localStorage.setItem('token', data.token)
+                    if (data.id !== undefined) {
+                        localStorage.setItem('idUser', data.id)
+                    }
+                    navigate('/');
+               }
             })
             .catch(function(error) {
+                setMessageLogin("L'identifiant ou le mot de passe est incorrect !");
+                setMessagePassword("L'identifiant ou le mot de passe est incorrect !");
                 console.log(error);
             });
         } 
