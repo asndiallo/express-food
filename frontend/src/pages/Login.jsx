@@ -22,9 +22,7 @@ function Login() {
                var data = res.data;
                if (data !== null) {
                     localStorage.setItem('token', data.token)
-                    if (data.customer_id !== undefined) {
-                        localStorage.setItem('idUser', data.customer_id)
-                    }
+                    localStorage.setItem('idUser', data.customer_id)
                     navigate('/');
                }
             })

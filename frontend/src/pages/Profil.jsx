@@ -12,7 +12,6 @@ function Profil() {
     const [name, setName] = useState('');
     const [adresse, setAdresse] = useState('');
     const [zip, setZIP] = useState('');
-    const [mail, setMail] = useState('');
     const [phone, setPhone] = useState('');
     const [birthday, setBirthday] = useState('');
     const [country, setCountry] = useState('');
@@ -24,7 +23,6 @@ function Profil() {
     const [messageName, setMessageName] = useState('');
     const [messageAdresse, setMessageAdresse] = useState('');
     const [messageZip, setMessageZip] = useState('');
-    const [messageMail, setMessageMail] = useState('');
     const [messagePhone, setMessagePhone] = useState('');
     const [messageBirthday, setMessageBirthday] = useState('');
     const [messageCountry, setMessageCountry] = useState('');
@@ -59,7 +57,7 @@ function Profil() {
     }
 
     const getProfil = async () => {
-        const link = domain + "/api/v1/customers/" + localStorage.id;
+        const link = domain + "/api/v1/customers/" + localStorage.idUser;
         if (link !== '') {
             await axios.get(link, {
                 _id: localStorage.id,
@@ -67,17 +65,16 @@ function Profil() {
             })
             .then(function(res) {
                 const data = res.data;
-               console.log(res)
-               if (data !== null) {
-                    setName(data.last_name);
-                    setFirstName(data.first_name);
-                    setBirthday(new Date(data.birthday));
-                    setLogin(data.email);
-                    setPhone(data.phone);
-                    setAdresse(data.address);
-                    setZIP(data.zip);
-                    setCountry(data.country);
-               }
+                if (data !== null) {
+                        setName(data.last_name);
+                        setFirstName(data.first_name);
+                        setBirthday(data.birthday.split('T')[0]);
+                        setLogin(data.email);
+                        setPhone(data.phone);
+                        setAdresse(data.address);
+                        setZIP(data.zip);
+                        setCountry(data.country);
+                }
             })
             .catch(function(error) {
                 console.log(error);
@@ -93,7 +90,6 @@ function Profil() {
         setMessageName('');
         setMessageAdresse('');
         setMessageZip('');
-        setMessageMail('');
         setMessageBirthday('');
         setMessageLogin('');
         setMessagePhone('');
@@ -108,7 +104,7 @@ function Profil() {
         clearMessages();
 
         if (!(login.length >= 3 && login.length <= 100)) {
-            setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
+            setMessageLogin("Veuillez renseigner une adresse e-mail entre 3 et 100 caractères !")
             validate = false;
         }
         if (!(password.length >= 3 && password.length <= 20)) {
@@ -142,10 +138,6 @@ function Profil() {
         }
         if (!(name.length >= 3 && name.length <= 20)) {
             setMessageName("Veuillez renseigner un nom entre 3 et 20 caractères !")
-            validate = false;
-        }
-        if (!(mail.length >= 3 && mail.length <= 32)) {
-            setMessageMail("Veuillez renseigner un mail entre 3 et 32 caractères !")
             validate = false;
         }
         if (parseInt(phone.length) !== 10) {
@@ -211,11 +203,6 @@ function Profil() {
                         <label htmlFor="login">Pays</label>
                         <input type="text" value={country} onChange={(e)=>setCountry(e.target.value)} maxLength="64" required />
                         <span className="log-message">{messageCountry}</span>
-                    </div>
-                    <div className="container-col">
-                        <label htmlFor="login">Adresse e-mail</label>
-                        <input type="text" value={mail} onChange={(e)=>setMail(e.target.value)} maxLength="20" required />
-                        <span className="log-message">{setMail}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Téléphone</label>
