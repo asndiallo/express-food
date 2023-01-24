@@ -22,8 +22,8 @@ function Login() {
                var data = res.data;
                if (data !== null) {
                     localStorage.setItem('token', data.token)
-                    if (data.id !== undefined) {
-                        localStorage.setItem('idUser', data.id)
+                    if (data.customer_id !== undefined) {
+                        localStorage.setItem('idUser', data.customer_id)
                     }
                     navigate('/');
                }

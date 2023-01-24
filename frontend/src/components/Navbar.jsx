@@ -7,6 +7,7 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import {
     BsList
 } from 'react-icons/bs';
+import { isConnected } from '../variables';
 
 function Navbar() {
     const navigate = useNavigate();
@@ -38,10 +39,6 @@ function Navbar() {
         setShowNavbar(false);
     }
 
-    const isConnected = () => {
-        return localStorage.getItem("id") !== 'null'
-               && localStorage.getItem("token") !== 'null'
-    }
 
     const getHeightNavbarResponsive = () => {
         if (!isConnected()) {
