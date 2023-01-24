@@ -1,7 +1,9 @@
 from bson import ObjectId
-from rest_framework import generics
+from random import sample
+from rest_framework import generics, views
+from rest_framework.response import Response
 from .models import Menu
-from .serializers import MenuSerializer
+from .serializers import MenuSerializer, TodayMenuSerializer
 
 
 class MenuTypeView(generics.ListAPIView):
@@ -24,3 +26,15 @@ class MenuTypeDetailView(generics.RetrieveUpdateDestroyAPIView):
 class MenuCreateView(generics.CreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+
+
+class TodayMenuView(views.APIView):
+    def get(self, request):
+        dishes = Menu.objects.filter(type='dish')
+        desserts = Menu.objects.filter(type='dessert')
+        today_dishes = sample(list(dishes), 2)
+        today_desserts = sample(list(desserts), 2)
+        today_menu = {'today_dishes': today_dishes,
+                      'today_desserts': today_desserts}
+        serializer = TodayMenuSerializer(today_menu)
+        return Response(serializer.data)
