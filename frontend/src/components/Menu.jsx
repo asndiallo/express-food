@@ -7,23 +7,27 @@ import {
 } from "react-icons/bs";
 
 function Menu({data}) {
-    const obj = {
-        id: 1, 
-        name: 'Oeuf',
-        description: 'zhiouzehgioureg',
-        price: 0.15,
-        type: 'Plats',
+
+    const getCorrectTypeMenu = (type) => {
+        switch (type) {
+            case "dessert":
+                return "Dessert";
+            case "dish":
+                return "Plat";
+            default:
+                return "Inconnu";
+        }
     }
 
     return ( 
         <div className="menu_component">
             <div className="menu_image">
-                <span className="menu_price">{obj.price}€</span>
+                <span className="menu_price">{data.price}€</span>
             </div>
             <div className="menu_description">
-                <span className="menu_title">{obj.name}</span>
-                <span className="menu_description">{obj.description}</span>
-                <span className="menu_type">{obj.type}</span>
+                <span className="menu_title">{data.name}</span>
+                <span className="menu__span_description">{data.description}</span>
+                <span className="menu_type">{getCorrectTypeMenu(data.type)}</span>
                 <div className="menu_order">
                     <BsCartPlusFill size="18" style={{cursor: 'pointer'}} />
                     <span>0</span>
