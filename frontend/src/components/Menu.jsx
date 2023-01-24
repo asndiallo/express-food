@@ -26,7 +26,7 @@ function Menu({data}) {
             </div>
             <div className="menu_description">
                 <span className="menu_title">{data.name}</span>
-                <span className="menu__span_description">{data.description}</span>
+                <p className="menu__description">{data.description}</p>
                 <span className="menu_type">{getCorrectTypeMenu(data.type)}</span>
                 <div className="menu_order">
                     <BsCartPlusFill size="18" style={{cursor: 'pointer'}} />
