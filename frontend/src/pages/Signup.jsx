@@ -1,7 +1,16 @@
 import React, { useState} from 'react';
+import { domain } from '../variables';
+import axios from 'axios';
 import './Signup.css';
+import { useNavigate } from 'react-router-dom';
+
+function checkIfNumber(input) {
+    return !isNaN(input);
+}
 
 function Signup() {
+    const navigate = useNavigate();
+
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -9,7 +18,6 @@ function Signup() {
     const [name, setName] = useState('');
     const [adresse, setAdresse] = useState('');
     const [zip, setZIP] = useState('');
-    const [mail, setMail] = useState('');
     const [phone, setPhone] = useState('');
     const [birthday, setBirthday] = useState('');
     const [country, setCountry] = useState('');
@@ -21,7 +29,6 @@ function Signup() {
     const [messageName, setMessageName] = useState('');
     const [messageAdresse, setMessageAdresse] = useState('');
     const [messageZip, setMessageZip] = useState('');
-    const [messageMail, setMessageMail] = useState('');
     const [messagePhone, setMessagePhone] = useState('');
     const [messageBirthday, setMessageBirthday] = useState('');
     const [messageCountry, setMessageCountry] = useState('');
@@ -34,7 +41,6 @@ function Signup() {
         setMessageName('');
         setMessageAdresse('');
         setMessageZip('');
-        setMessageMail('');
         setMessageBirthday('');
         setMessageLogin('');
         setMessagePhone('');
@@ -48,7 +54,7 @@ function Signup() {
         // On clear les messages d'alertes
         clearMessages();
 
-        if (!(login.length >= 3 && login.length <= 20)) {
+        if (!(login.length >= 3 && login.length <= 100)) {
             setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
             validate = false;
         }
@@ -77,16 +83,12 @@ function Signup() {
             setMessageAdresse("Veuillez renseigner une adresse entre 3 et 64 caractères !")
             validate = false;
         }
-        if (zip.length < 5) {
+        if (zip.length < 5 || !checkIfNumber(zip)) {
             setMessageZip("Veuillez renseigner un code postal valide !")
             validate = false;
         }
         if (!(name.length >= 3 && name.length <= 20)) {
             setMessageName("Veuillez renseigner un nom entre 3 et 20 caractères !")
-            validate = false;
-        }
-        if (!(mail.length >= 3 && mail.length <= 32)) {
-            setMessageMail("Veuillez renseigner un mail entre 3 et 32 caractères !")
             validate = false;
         }
         if (parseInt(phone.length) !== 10) {
@@ -98,7 +100,36 @@ function Signup() {
             validate = false;
         }
 
+        if (validate) {
+            inscription();
+        }
+
         return validate;
+    }
+
+    const inscription = async () => {
+        const link = domain + "/api/v1/customers/signup/";
+        if (link !== '') {
+            await axios.post(link, {
+                email: login,
+                password: password,
+                first_name: firstName,
+                last_name: name,
+                birthday: birthday,
+                phone: phone,
+                address:adresse,
+                zip: zip,
+                country: country,
+            })
+            .then(function(res) {
+                alert('Votre compte a bien été crée ! Rendez-vous sur la page de connexion pour vous connecter !')
+                navigate('/');
+            })
+            .catch(function(error) {
+                alert('Le compte existe déjà !');
+                console.log(error);
+            });
+        } 
     }
 
     return ( 
@@ -110,8 +141,8 @@ function Signup() {
                 <form action="" className="log-formulaire" onSubmit={(e)=>handleSubmit(e)}>
                     <h1>Inscription</h1>
                     <div className="container-col">
-                        <label htmlFor="login">Nom d'utilisateur</label>
-                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="20" required />
+                        <label htmlFor="login">Adresse e-mail</label>
+                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="100" required />
                         <span className="log-message">{messageLogin}</span>
                     </div>
                     <div className="container-col">
@@ -148,11 +179,6 @@ function Signup() {
                         <label htmlFor="login">Pays</label>
                         <input type="text" value={country} onChange={(e)=>setCountry(e.target.value)} maxLength="64" required />
                         <span className="log-message">{messageCountry}</span>
-                    </div>
-                    <div className="container-col">
-                        <label htmlFor="login">Adresse e-mail</label>
-                        <input type="text" value={mail} onChange={(e)=>setMail(e.target.value)} maxLength="20" required />
-                        <span className="log-message">{setMail}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Téléphone</label>
