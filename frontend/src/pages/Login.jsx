@@ -59,7 +59,7 @@ function Login() {
     return ( 
         <div 
             className="login_page"
-            style={{backgroundImage: "url(/images/chad.jpg)", backgroundSize: "100% 100%", backgroundRepeat: 'no-repeat'}}
+            style={{backgroundImage: "url(/images/chad.jpg)", backgroundSize: "cover", backgroundRepeat: 'no-repeat'}}
         >
             <div className="login_content">
                 <form action="" className="log-formulaire" onSubmit={(e)=>handleSubmit(e)}>

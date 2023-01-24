@@ -122,8 +122,9 @@ function Signup() {
                 country: country,
             })
             .then(function(res) {
+                console.log(res)
                 alert('Votre compte a bien été crée ! Rendez-vous sur la page de connexion pour vous connecter !')
-                navigate('/');
+                // navigate('/');
             })
             .catch(function(error) {
                 alert('Le compte existe déjà !');
@@ -135,7 +136,7 @@ function Signup() {
     return ( 
         <div 
             className="signup_page"
-            style={{backgroundImage: "url(/images/brooke.jpg)", backgroundSize: "100% 100%", backgroundRepeat: 'no-repeat'}}
+            style={{backgroundImage: "url(/images/brooke.jpg)", backgroundSize: "cover", backgroundRepeat: 'no-repeat'}}
         >
             <div className="signup_content">
                 <form action="" className="log-formulaire" onSubmit={(e)=>handleSubmit(e)}>

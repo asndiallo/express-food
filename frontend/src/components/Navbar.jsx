@@ -7,7 +7,7 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import {
     BsList
 } from 'react-icons/bs';
-import { isConnected } from '../variables';
+import { clearLocalStorage, isConnected } from '../variables';
 
 function Navbar() {
     const navigate = useNavigate();
@@ -33,8 +33,7 @@ function Navbar() {
     }
 
     const logout = () => {
-        localStorage.id = null
-        localStorage.token = null;
+        clearLocalStorage()
         navigate('/');
         setShowNavbar(false);
     }
