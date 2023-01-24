@@ -40,7 +40,7 @@ function Login() {
         let validate = true;
         event.preventDefault();
 
-        if (!(login.length >= 3 && login.length <= 20)) {
+        if (!(login.length >= 3 && login.length <= 100)) {
             setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
             validate = false;
         }
@@ -66,7 +66,7 @@ function Login() {
                     <h1>Connexion</h1>
                     <div className="container-col">
                         <label htmlFor="login">Nom d'utilisateur</label>
-                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="20" required />
+                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="100" required />
                         <span className="log-message">{messageLogin}</span>
                     </div>
                     <div className="container-col">

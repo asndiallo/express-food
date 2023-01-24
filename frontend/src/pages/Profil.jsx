@@ -107,7 +107,7 @@ function Profil() {
         // On clear les messages d'alertes
         clearMessages();
 
-        if (!(login.length >= 3 && login.length <= 20)) {
+        if (!(login.length >= 3 && login.length <= 100)) {
             setMessageLogin("Veuillez renseigner un nom d'utilisateur entre 3 et 20 caractères !")
             validate = false;
         }
@@ -167,14 +167,14 @@ function Profil() {
     return ( 
         <div 
             className="profil_page"
-            style={{backgroundImage: "url(/images/brooke.jpg)", backgroundSize: "100% 100%", backgroundRepeat: 'no-repeat'}}
+            style={{backgroundImage: "url(/images/brooke.jpg)", backgroundSize: "cover", backgroundRepeat: 'no-repeat'}}
         >
             <div className="profil_content">
                 <form action="" className="log-formulaire" onSubmit={(e)=>handleSubmit(e)}>
                     <h1>Mon profil</h1>
                     <div className="container-col">
                         <label htmlFor="login">Nom d'utilisateur</label>
-                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="20" required />
+                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="100" required />
                         <span className="log-message">{messageLogin}</span>
                     </div>
                     <div className="container-col">
