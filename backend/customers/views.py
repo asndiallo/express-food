@@ -34,7 +34,7 @@ class SignupView(generics.CreateAPIView):
         # Create a new customer object and save it to the database
         customer = Customer(**serializer.validated_data)
         customer.save()
-        return Response({'message': 'Customer created successfully'}, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_201_CREATED)
 
 
 class LoginView(views.APIView):
