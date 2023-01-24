@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profil from './pages/Profil';
 import PrivateRoutes from './utils/PrivateRoutes';
+import DescriptionMenu from './pages/DescriptionMenu';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/dish/:menuId" element={<DescriptionMenu type="dish" />} />
+                <Route path="/dessert/:menuId" element={<DescriptionMenu type="dessert" />} />
             </Routes>
         </div>
         <Footer />
