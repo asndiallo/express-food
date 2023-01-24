@@ -122,9 +122,8 @@ function Signup() {
                 country: country,
             })
             .then(function(res) {
-                console.log(res)
                 alert('Votre compte a bien été crée ! Rendez-vous sur la page de connexion pour vous connecter !')
-                // navigate('/');
+                navigate('/');
             })
             .catch(function(error) {
                 alert('Le compte existe déjà !');
