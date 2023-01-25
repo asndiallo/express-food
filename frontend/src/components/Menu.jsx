@@ -7,7 +7,7 @@ import {
     BsCartPlusFill
 } from "react-icons/bs";
 
-function Menu({data}) {
+function Menu({data, canAddToCart = true}) {
     const navigate = useNavigate();
 
     const getCorrectTypeMenu = (type) => {
@@ -47,9 +47,12 @@ function Menu({data}) {
                 <span className="menu_title">{data.name}</span>
                 <p className="menu__description">{data.description}</p>
                 <span className="menu_type">{getCorrectTypeMenu(data.type)}</span>
-                <div className="menu_order">
-                    <BsCartPlusFill size="18" style={{cursor: 'pointer'}} />
-                </div>
+                {
+                    canAddToCart &&
+                    <div className="menu_order">
+                        <BsCartPlusFill size="18" style={{cursor: 'pointer'}} />
+                    </div>
+                }
             </div>
         </div>
      );
