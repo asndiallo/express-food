@@ -16,12 +16,13 @@ function Panier() {
     }, [])
 
     const getCart = async () => {
-        const link = domain + "/api/v1/menus";
+        const id = localStorage.getItem('idUser').toString();
+        const link = domain + "/api/v1/customers/" + id + "/cart";
         if (link !== '') {
             await axios.get(link, {})
             .then(function(res) {
                 const data = res.data;
-                setMenus(data.today_dishes);
+                console.log(res)
             })
             .catch(function(error) {
                 console.log(error);
