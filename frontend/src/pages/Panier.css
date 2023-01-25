@@ -1,0 +1,20 @@
+.panier_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.panier_items {
+    display: flex;
+    gap: 10px;
+}
+
+.panier_item {
+    position: relative;
+}
+
+.panier_remove {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+}
