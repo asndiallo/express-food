@@ -49,7 +49,6 @@ function Menu({data}) {
                 <span className="menu_type">{getCorrectTypeMenu(data.type)}</span>
                 <div className="menu_order">
                     <BsCartPlusFill size="18" style={{cursor: 'pointer'}} />
-                    <span>0</span>
                 </div>
             </div>
         </div>
