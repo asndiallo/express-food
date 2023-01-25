@@ -1,4 +1,5 @@
 from djongo import models
+from menus.models import Menu
 
 
 class Customer(models.Model):
@@ -15,3 +16,10 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+
+class Cart(models.Model):
+    _id = models.ObjectIdField()
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.IntegerField()

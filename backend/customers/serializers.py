@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Customer
+from bson import ObjectId
+from .models import Customer, Cart
+from menus.models import Menu
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -20,6 +22,28 @@ class SignupSerializer(serializers.Serializer):
     zip = serializers.CharField()
     country = serializers.CharField()
 
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
+
+
+class CartSerializer(serializers.ModelSerializer):
+    customer = serializers.CharField()
+    menu = serializers.CharField()
+
+    def validate(self, data):
+        data['customer'] = ObjectId(data['customer'])
+        data['menu'] = ObjectId(data['menu'])
+        return data
+
+    def save(self, **kwargs):
+        customer = Customer.objects.get(
+            _id=ObjectId(self.validated_data.get('customer')))
+        menu = Menu.objects.get(_id=ObjectId(self.validated_data.get('menu')))
+        self.validated_data.update({'customer': customer, 'menu': menu})
+        return super().save(**kwargs)
+
+    class Meta:
+        model = Cart
+        fields = ('_id', 'customer', 'menu', 'quantity')

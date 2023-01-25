@@ -3,10 +3,11 @@ from jwt import PyJWT
 import datetime
 from decouple import config
 from rest_framework.response import Response
-from rest_framework import generics, views, status
+from rest_framework import generics, views, status, viewsets
 from django.contrib.auth.hashers import make_password, check_password
-from .models import Customer
-from .serializers import CustomerSerializer, SignupSerializer, LoginSerializer
+from .models import Customer, Cart
+from menus.models import Menu
+from .serializers import CustomerSerializer, SignupSerializer, LoginSerializer, CartSerializer
 
 
 class CustomerList(generics.ListCreateAPIView):
@@ -63,3 +64,26 @@ class LoginView(views.APIView):
             return Response({'token': token, 'customer_id': str(user._id), }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+    lookup_field = 'pk'
+
+    def add_to_cart(self, request, *args, **kwargs):
+        serializer = CartSerializer(data=request.data)
+        print(serializer)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CartDetail(generics.RetrieveAPIView):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+    lookup_field = 'pk'
+    
+    def get_object(self):
+        customer = ObjectId(self.kwargs[self.lookup_field])
+        return Cart.objects.get(customer_id=customer)
