@@ -70,8 +70,16 @@ class CartViewSet(viewsets.ModelViewSet):
         customer = Customer.objects.get(_id=ObjectId(customer_id))
         return Cart.objects.filter(customer=customer)
 
-    def perform_create(self, request, *args, **kwargs):
+    def add_to_cart(self, request, *args, **kwargs):
         serializer = CartSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def list(self, request, *args, **kwargs):
         customer_id = self.kwargs.get('customer_id')
         customer = Customer.objects.get(_id=ObjectId(customer_id))
-        serializer.save(customer=customer)
+        queryset = Cart.objects.filter(customer=customer)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
