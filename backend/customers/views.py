@@ -64,7 +64,7 @@ class LoginView(views.APIView):
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
-    lookup_field = '_id'
+    lookup_field = 'cart_id'
 
     def get_object(self):
         return Cart.objects.get(_id=ObjectId(self.kwargs[self.lookup_field]))
