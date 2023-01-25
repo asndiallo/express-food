@@ -1,12 +1,13 @@
-from django.urls import path
-from .views import CustomerList, CustomerDetail, SignupView, LoginView, CartViewSet, CartDetail
+from django.urls import path, include
+from .views import SignupView, LoginView, CartViewSet, CustomerViewSet
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register('', CustomerViewSet)
+router.register('<str:customer_id>/cart/', CartViewSet)
 
 urlpatterns = [
     path('signup/', SignupView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),
-    path('', CustomerList.as_view(), name='customer_list'),
-    path('<str:pk>/', CustomerDetail.as_view(), name='customer_detail'),
-    path('<str:pk>/cart/', CartDetail.as_view(), name='customer_cart_detail'),
-    path('<str:pk>/cart/add_to_cart/',
-         CartViewSet.as_view({'post': 'add_to_cart'}), name='add_to_customer_cart'),
+    path('', include(router.urls)),
 ]

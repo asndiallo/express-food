@@ -10,15 +10,10 @@ from menus.models import Menu
 from .serializers import CustomerSerializer, SignupSerializer, LoginSerializer, CartSerializer
 
 
-class CustomerList(generics.ListCreateAPIView):
+class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-
-
-class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
-    lookup_field = 'pk'
+    lookup_field = '_id'
 
     def get_object(self):
         return Customer.objects.get(_id=ObjectId(self.kwargs[self.lookup_field]))
@@ -69,21 +64,14 @@ class LoginView(views.APIView):
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
-    lookup_field = 'pk'
 
-    def add_to_cart(self, request, *args, **kwargs):
+    def get_queryset(self):
+        customer_id = self.kwargs.get('customer_id')
+        customer = Customer.objects.get(_id=ObjectId(customer_id))
+        return Cart.objects.filter(customer=customer)
+
+    def perform_create(self, request, *args, **kwargs):
         serializer = CartSerializer(data=request.data)
-        print(serializer)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class CartDetail(generics.RetrieveAPIView):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
-    lookup_field = 'pk'
-    
-    def get_object(self):
-        customer = ObjectId(self.kwargs[self.lookup_field])
-        return Cart.objects.get(customer_id=customer)
+        customer_id = self.kwargs.get('customer_id')
+        customer = Customer.objects.get(_id=ObjectId(customer_id))
+        serializer.save(customer=customer)
