@@ -64,6 +64,10 @@ class LoginView(views.APIView):
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    lookup_field = '_id'
+
+    def get_object(self):
+        return Cart.objects.get(_id=ObjectId(self.kwargs[self.lookup_field]))
 
     def get_queryset(self):
         customer_id = self.kwargs.get('customer_id')
@@ -83,3 +87,16 @@ class CartViewSet(viewsets.ModelViewSet):
         queryset = Cart.objects.filter(customer=customer)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        print('instance',instance)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
