@@ -67,8 +67,8 @@ function Navbar() {
                     ||
                     <ul>
                         <NavLink to="/profil" className="link" onClick={(e)=>setShowNavbar(false)}>Accès à mon profil</NavLink>
-                        <NavLink to="/panier" className="link" onClick={(e)=>setShowNavbar(false)}>Mon panier</NavLink>
-                        <NavLink to="/myOrders" className="link" onClick={(e)=>setShowNavbar(false)}>Mes commandes</NavLink>
+                        <NavLink to="/cart" className="link" onClick={(e)=>setShowNavbar(false)}>Mon panier</NavLink>
+                        <NavLink to="/orders" className="link" onClick={(e)=>setShowNavbar(false)}>Mes commandes</NavLink>
                         <span className="link" onClick={(e)=>logout()}>Déconnexion</span>
                     </ul>
                 }

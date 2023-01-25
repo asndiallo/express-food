@@ -12,6 +12,8 @@ import Signup from './pages/Signup';
 import Profil from './pages/Profil';
 import PrivateRoutes from './utils/PrivateRoutes';
 import DescriptionMenu from './pages/DescriptionMenu';
+import Panier from './pages/Panier';
+import Orders from './pages/Orders';
 
 function App() {
   return (
@@ -23,7 +25,8 @@ function App() {
               <Route element={<PrivateRoutes />}>
                   {/* // METTRE LES ROUTES QUI NECCESSITE UNE CONNEXION ICI */}
                   <Route path="/profil" element={<Profil />} />
-
+                  <Route path="/cart" element={<Panier />} />
+                  <Route path="/orders" element={<Orders />} />
               </Route>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />

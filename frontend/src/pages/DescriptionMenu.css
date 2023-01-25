@@ -58,3 +58,30 @@
     color: white;
     background-color: var(--secondary-color);
 }
+
+.validate_container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 999;
+    transition: ease-in-out all 0.1s;
+    position: relative;
+}
+
+.validate_icon {
+    display: block;
+    color: white;
+    border-radius: 50px;
+    padding: 5px;
+    top: 20%;
+    right: 50px;
+    background-color: greenyellow;
+    transition: ease-in-out all 0.2s;
+    position: absolute;
+}
+
+.validate_icon.active {
+    display: block;
+    top: 20%;
+    right: -50px;
+}

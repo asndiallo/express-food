@@ -1,0 +1,40 @@
+.order_item {
+    width: 75%;
+    padding: 20px;
+    background-color: white;
+    height: auto;
+    transition: ease-in-out all 0.2s;
+}
+
+.order_item_row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.orders_title {
+    font-weight: bold;
+}
+
+.orders_arrow {
+    cursor: pointer;
+    transition: ease-in-out all 0.2s;
+}
+
+.orders_arrow.active {
+    transform: rotate(90deg);
+}
+
+.order_informations {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.order_table {
+    width: 100%;
+}
+
+.order_table thead tr td {
+    font-weight: bold;
+}
