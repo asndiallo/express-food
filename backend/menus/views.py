@@ -38,3 +38,11 @@ class TodayMenuView(views.APIView):
                       'today_desserts': today_desserts}
         serializer = TodayMenuSerializer(today_menu)
         return Response(serializer.data)
+
+class DetailsMenuView(generics.RetrieveAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    lookup_field = 'menu_name'
+
+    def get_object(self):
+        return Menu.objects.get(name=self.kwargs[self.lookup_field])
