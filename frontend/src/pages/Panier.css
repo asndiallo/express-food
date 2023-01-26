@@ -2,10 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 50px 0px;
+}
+
+.panier_content h1 {
+    margin-bottom: 100px;
 }
 
 .panier_items {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -17,4 +24,12 @@
     top: 5px;
     right: 5px;
     position: absolute;
+}
+
+.panier_update {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }

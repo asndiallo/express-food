@@ -95,3 +95,21 @@ html, body {
     margin: 0px;
     color: red;
 }
+
+.primary-button {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 20px 35px;
+    border: none;
+    border-radius: 12px;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    transition: ease-in-out 0.2s all;
+    z-index: 999;
+}
+
+.primary-button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--secondary-color);
+}
