@@ -22,12 +22,30 @@ function Panier() {
             await axios.get(link, {})
             .then(function(res) {
                 const data = res.data;
-                console.log(res)
+                parseData(data);
             })
             .catch(function(error) {
                 console.log(error);
             });
         } 
+    }
+
+    const getMenu = async () => {
+        const id = localStorage.getItem('idUser').toString();
+        const link = domain + "/api/v1/menus/" + id + "/cart";
+        if (link !== '') {
+            await axios.get(link, {})
+            .then(function(res) {
+                const data = res.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        } 
+    }
+
+    const parseData = () => {
+
     }
 
     return ( 
