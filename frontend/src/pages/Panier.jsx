@@ -23,6 +23,40 @@ function Panier() {
             .then(function(res) {
                 const data = res.data;
                 parseData(data);
+                console.log(data)
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        } 
+    }
+
+    const deleteCart = async () => {
+        const id = localStorage.getItem('idUser').toString();
+        const link = domain + "/api/v1/customers/" + id + "/cart";
+        if (link !== '') {
+            await axios.delete(link, {})
+            .then(function(res) {
+                const data = res.data;
+                parseData(data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        } 
+    }
+
+    const updateCart = async () => {
+        const id = localStorage.getItem('idUser').toString();
+        const link = domain + "/api/v1/customers/" + id + "/cart";
+        if (link !== '') {
+            await axios.put(link, {
+
+            })
+            .then(function(res) {
+                const data = res.data;
+                parseData(data);
             })
             .catch(function(error) {
                 console.log(error);
