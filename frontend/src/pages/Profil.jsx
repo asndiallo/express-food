@@ -166,10 +166,10 @@ function Profil() {
                     <h1>Mon profil</h1>
                     <div className="container-col">
                         <label htmlFor="login">Nom d'utilisateur</label>
-                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="100" required />
+                        <input type="text" value={login} onChange={(e)=>setLogin(e.target.value)} maxLength="100" required readOnly/>
                         <span className="log-message">{messageLogin}</span>
                     </div>
-                    <div className="container-col">
+                    {/* <div className="container-col">
                         <label htmlFor="login">Mot de passe</label>
                         <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} maxLength="20" required />
                         <span className="log-message">{messagePassword}</span>
@@ -178,43 +178,43 @@ function Profil() {
                         <label htmlFor="login">Confirmation du mot de passe</label>
                         <input type="password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} maxLength="20" required />
                         <span className="log-message">{messageConfirmPassword}</span>
-                    </div>
+                    </div> */}
                     <div className="container-col">
                         <label htmlFor="login">Prénom</label>
-                        <input type="text" value={firstName} onChange={(e)=>setFirstName(e.target.value)} maxLength="20" required />
+                        <input type="text" value={firstName} onChange={(e)=>setFirstName(e.target.value)} maxLength="20" required readOnly />
                         <span className="log-message">{messageFirstName}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Nom de famille</label>
-                        <input type="text" value={name} onChange={(e)=>setName(e.target.value)} maxLength="20" required />
+                        <input type="text" value={name} onChange={(e)=>setName(e.target.value)} maxLength="20" required readOnly />
                         <span className="log-message">{messageName}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Adresse</label>
-                        <input type="text" value={adresse} onChange={(e)=>setAdresse(e.target.value)} maxLength="20" required />
+                        <input type="text" value={adresse} onChange={(e)=>setAdresse(e.target.value)} maxLength="20" required readOnly />
                         <span className="log-message">{messageAdresse}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Code postal</label>
-                        <input type="text" value={zip} onChange={(e)=>setZIP(e.target.value)} maxLength="5" required />
+                        <input type="text" value={zip} onChange={(e)=>setZIP(e.target.value)} maxLength="5" required readOnly />
                         <span className="log-message">{messageZip}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Pays</label>
-                        <input type="text" value={country} onChange={(e)=>setCountry(e.target.value)} maxLength="64" required />
+                        <input type="text" value={country} onChange={(e)=>setCountry(e.target.value)} maxLength="64" required readOnly />
                         <span className="log-message">{messageCountry}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Téléphone</label>
-                        <input type="text" value={phone} onChange={(e)=>setPhone(e.target.value)} maxLength="10" required />
+                        <input type="text" value={phone} onChange={(e)=>setPhone(e.target.value)} maxLength="10" required readOnly />
                         <span className="log-message">{messagePhone}</span>
                     </div>
                     <div className="container-col">
                         <label htmlFor="login">Date de naissance</label>
-                        <input type="date" value={birthday} onChange={(e)=>setBirthday(e.target.value)} maxLength="20" required />
+                        <input type="date" value={birthday} onChange={(e)=>setBirthday(e.target.value)} maxLength="20" required readOnly />
                         <span className="log-message">{messageBirthday}</span>
                     </div>
-                    <input type="submit" className="form_button" value="Modifier mon profil" />
+                    {/* <input type="submit" className="form_button" value="Modifier mon profil" /> */}
                 </form>
             </div>
            

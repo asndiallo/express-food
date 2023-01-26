@@ -113,3 +113,8 @@ html, body {
     color: white;
     background-color: var(--secondary-color);
 }
+
+input:read-only {
+    cursor: default;
+    background-color: rgba(128, 128, 128, 0.26);
+}
