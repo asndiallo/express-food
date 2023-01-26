@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './DescriptionMenu.css'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { domain } from '../variables';
+import { domain, isConnected } from '../variables';
 import { AiOutlineCheck } from "react-icons/ai";
 
 function DescriptionMenu({type}) {
     const { menuId } = useParams();
     const [menu, setMenu] = useState({});
     const [validate, setValidate] = useState(false);
+    const [messageAlert, setMessageAlert] = useState("");
 
     useEffect(() => {
         // On utilise la bonne route API
@@ -65,6 +66,14 @@ function DescriptionMenu({type}) {
     }
 
     const addToCart = async () => {
+
+        if (!isConnected()) {
+            setMessageAlert("Veuillez vous connecter pour ajouter un repas à votre panier !")
+            return false;
+        }
+
+        setMessageAlert("");
+
         const id = localStorage.getItem("idUser");
         const link = domain + "/api/v1/customers/" + id + "/add-to-cart/";
         if (link !== '') {
@@ -106,6 +115,7 @@ function DescriptionMenu({type}) {
                     <button onClick={()=>addToCart()}>Ajouter à mon panier</button>
                     <AiOutlineCheck className={"validate_icon " + (validate ? 'active' : '')} size="34" />
                 </div>
+                <span style={{textShadow: '0px 2px 2px black', color: 'red', zIndex: 999}}>{messageAlert}</span>
             </div>
         </div>
     );
