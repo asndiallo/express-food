@@ -68,3 +68,12 @@
     bottom: 5px;
     position: absolute;
 }
+
+.added {
+    color: black;
+    transition: ease-in-out all 0.1s;
+}
+
+.added.active {
+    color: yellowgreen;
+}

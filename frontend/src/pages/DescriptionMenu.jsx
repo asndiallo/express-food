@@ -64,17 +64,30 @@ function DescriptionMenu({type}) {
         }
     }
 
-    const addToCart = () => {
-        // On indique qu'on a ajouter au panier
-        setValidate(true);
+    const addToCart = async () => {
+        const id = localStorage.getItem("idUser");
+        const link = domain + "/api/v1/customers/" + id + "/add-to-cart/";
+        if (link !== '') {
+            await axios.post(link, {
+                customer: id,
+                menu: menu._id,
+                quantity: 1,
+            })
+            .then(function(res) {
+                // On indique qu'on a ajouter au panier
+                setValidate(true);
 
-        // on clear l'indiquation pour finir l'animation de validation
-        const timeout = setTimeout(() => {
-            setValidate(false);
-            clearTimeout(timeout);
-        }, 1000);
-
-        // on ajoute au panier
+                // on clear l'indiquation pour finir l'animation de validation
+                const timeout = setTimeout(() => {
+                    setValidate(false);
+                    clearTimeout(timeout);
+                }, 1000);
+            })
+            .catch(function(error) {
+                alert("Erreur survenue lors de l'ajout au panier ! Veuillez réessayer !")
+                console.log(error);
+            });
+        } 
     }
 
     return ( 

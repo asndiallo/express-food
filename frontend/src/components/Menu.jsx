@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Menu.css';
 import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 
 import { 
     BsCartPlus,
     BsCartPlusFill
 } from "react-icons/bs";
+import { domain, isConnected } from '../variables';
 
 function Menu({data, canAddToCart = true}) {
     const navigate = useNavigate();
+    const [added, setAdded] = useState("black");
 
     const getCorrectTypeMenu = (type) => {
         switch (type) {
@@ -34,6 +37,29 @@ function Menu({data, canAddToCart = true}) {
         }
     }
 
+    const addToCart = async () => {
+        const id = localStorage.getItem("idUser");
+        const link = domain + "/api/v1/customers/" + id + "/add-to-cart/";
+        if (link !== '') {
+            await axios.post(link, {
+                customer: id,
+                menu: data._id,
+                quantity: 1,
+            })
+            .then(function(res) {
+                const timeout = setTimeout(() => {
+                    setAdded("black");
+                    clearTimeout(timeout);
+                }, 300);
+                setAdded("yellowgreen");
+            })
+            .catch(function(error) {
+                setAdded('red')
+                console.log(error);
+            });
+        } 
+    }
+
     return ( 
         <div className="menu_component">
             <div 
@@ -48,9 +74,9 @@ function Menu({data, canAddToCart = true}) {
                 <p className="menu__description">{data.description}</p>
                 <span className="menu_type">{getCorrectTypeMenu(data.type)}</span>
                 {
-                    canAddToCart &&
-                    <div className="menu_order">
-                        <BsCartPlusFill size="18" style={{cursor: 'pointer'}} />
+                    canAddToCart && isConnected() &&
+                    <div className="menu_order" onClick={()=>addToCart()}>
+                        <BsCartPlusFill size="18" style={{cursor: 'pointer', color: added, transition: "ease-in-out all 0.1s"}} title="Ajouter au panier" />
                     </div>
                 }
             </div>
