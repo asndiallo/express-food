@@ -5,9 +5,9 @@ from decouple import config
 from rest_framework.response import Response
 from rest_framework import generics, views, status, viewsets
 from django.contrib.auth.hashers import make_password, check_password
-from .models import Customer, Cart
-from menus.models import Menu
-from .serializers import CustomerSerializer, SignupSerializer, LoginSerializer, CartSerializer
+from django.shortcuts import get_object_or_404
+from .models import Customer, Cart, Order
+from .serializers import CustomerSerializer, SignupSerializer, LoginSerializer, CartSerializer, OrderSerializer
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -90,8 +90,9 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
-        print('instance',instance)
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        print('instance', instance)
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -99,4 +100,43 @@ class CartViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    lookup_field = 'order_id'
+
+    def get_object(self):
+        return get_object_or_404(Order, _id=self.kwargs[self.lookup_field])
+
+    def get_queryset(self):
+        customer_id = self.kwargs.get('customer_id')
+        customer = Customer.objects.get(_id=ObjectId(customer_id))
+        return Order.objects.filter(customer=customer)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        serializer = OrderSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        order = serializer.save()
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def update(self, request, *args, **kwargs):
+        order = self.get_object()
+        serializer = self.get_serializer(
+            order, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        order = self.get_object()
+        order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

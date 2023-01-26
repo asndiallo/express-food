@@ -1,9 +1,10 @@
 from djongo import models
 from menus.models import Menu
+from deliverers.models import Deliverer
 
 
 class Customer(models.Model):
-    _id = models.ObjectIdField()
+    _id = models.ObjectIdField(primary_key=True)
     last_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     birthday = models.DateTimeField()
@@ -23,3 +24,16 @@ class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+
+
+class Order(models.Model):
+    _id = models.ObjectIdField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    menus = models.ManyToManyField(Menu)
+    deliverer = models.ForeignKey(
+        Deliverer, on_delete=models.CASCADE, null=True, blank=True)
+    order_time = models.DateTimeField(auto_now_add=True)
+    delivery_time = models.DateTimeField(
+        auto_now_add=True, null=True, blank=True)
+    delivered = models.BooleanField(default=False)
+    total_cost = models.DecimalField(max_digits=5, decimal_places=2)
