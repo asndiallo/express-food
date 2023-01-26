@@ -38,7 +38,7 @@ function Menu({data, canAddToCart = true}) {
         <div className="menu_component">
             <div 
                 className="menu_image"
-                style={{cursor: 'pointer'}}
+                style={{cursor: 'pointer', backgroundImage: 'url(' + data.image  + ')', backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
                 onClick={()=>redirection(data.type, data._id)}
             >
                 <span className="menu_price">{data.price}€</span>
