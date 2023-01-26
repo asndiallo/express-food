@@ -81,7 +81,7 @@ function DescriptionMenu({type}) {
         <div className="description_menu_page">
             <div 
                 className="description_content"
-                style={{backgroundImage: "url(/images/bol.jpg)", backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
+                style={{backgroundImage: "url(" + menu.image + ")", backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
             >
                 <h1>{menu.name}</h1>
                 <h4>{getCorrectType()}</h4>
