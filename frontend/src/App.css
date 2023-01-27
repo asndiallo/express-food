@@ -90,7 +90,7 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: wrap;
-    max-width: 275px;
+    max-width: 290px;
     font-size: 14px;
     margin: 0px;
     color: red;
