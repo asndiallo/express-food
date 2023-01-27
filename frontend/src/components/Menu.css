@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 250px;
     max-width: 250px;
+    height: auto;
+    min-height: 100%;
     background-color: white;
     box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.75);
     -webkit-box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.5);
@@ -33,7 +35,8 @@
     justify-content: space-between;
     height: 100%;
     max-height: 200px;
-    padding: 0px 5px;
+    min-height: 150px;
+    padding: 5px 5px;
     gap: 2px;
     position: relative;
 }
@@ -67,4 +70,13 @@
     right: 5px;
     bottom: 5px;
     position: absolute;
+}
+
+.added {
+    color: black;
+    transition: ease-in-out all 0.1s;
+}
+
+.added.active {
+    color: yellowgreen;
 }
